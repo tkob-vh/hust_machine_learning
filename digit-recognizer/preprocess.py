@@ -6,7 +6,7 @@ from sklearn import model_selection
 def load_train_data():
     print("Begin loading train data")
     # read the train and test data
-    train_data = pd.read_csv('data/train.csv', nrows=2000)
+    train_data = pd.read_csv('data/train.csv', nrows=5000)
 
 
     # split the train data into X_train and y_train
@@ -25,7 +25,7 @@ def load_train_data():
 
 def load_test_data():
     print("Begin loading test data")
-    test_data = pd.read_csv('data/test.csv', nrows=2000)
+    test_data = pd.read_csv('data/test.csv', nrows=5000)
     X_test = test_data.values
     print("X_test shape: ", X_test.shape)
     return X_test

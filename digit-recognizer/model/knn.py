@@ -37,6 +37,10 @@ class KNN:
 
 
 def train_knn(X_train, y_train, X_validate, y_validate):
+    '''
+    This function trains the KNN model on the training data and validates it on the validation data.
+    '''
+    print("Begin training")
     kVals = range(1, 5)
     accuracies = []
     for K in kVals:
@@ -51,11 +55,16 @@ def train_knn(X_train, y_train, X_validate, y_validate):
     # plt.plot(kVals, accuracies)
     # plt.xlabel('K Value')
     # plt.ylabel('Accuracy')
+    print("Training completed")
     return max_index + 1
 
 def inference_knn(X_train, y_train, X_test, k):
+    '''
+    This function predicts the output for the test data using the trained KNN model.
+    '''
     print("Begin inference")
     model = KNN(k)
     model.fit(X_train, y_train)
     pred = model.predict(X_test)
+    print("Inference completed")
     return pred
