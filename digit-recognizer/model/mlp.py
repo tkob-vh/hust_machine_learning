@@ -16,7 +16,7 @@ class LinearLayer:
         '''
         self.weights = np.random.randn(input_size, output_size) * np.sqrt(2. / input_size) # weights initialization
         self.weights_grads = np.empty_like(self.weights) # gradient of weights
-        self.biases = np.random.randn(output_size) / 10. # biases initialization
+        self.biases = np.zeros(output_size) # biases initialization
         self.biases_grads = np.empty_like(self.biases) # gradient of biases
 
         self.activation_function = self.ReLU
@@ -136,3 +136,14 @@ def train_mlp(X_train, y_train):
 
 def inference_mlp(X_test, mlp):
     return mlp.predict(X_test)
+
+def plot(mlp):
+    n_metrics = len(mlp.metrics)
+    fig, ax = plt.subplots(n_metrics, 1, figsize=(10, 5 * n_metrics))
+    fig.tight_layout(pad=5)
+    for i, metric in enumerate(mlp.metrics):
+        n_epochs = len(mlp.metrics[metric])
+        ax[i].plot(range(1, n_epochs + 1), mlp.metrics[metric], color='k')
+        ax[i].axhline(mlp.metrics[metric][-1], linestyle='--', color='g')
+        ax[i].set_title(metric)
+        ax[i].set_xlabel('epoch')

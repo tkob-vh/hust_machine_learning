@@ -20,5 +20,9 @@ if __name__ == '__main__':
 
 
     predictions_df = pd.DataFrame(data={'ImageId': np.arange(1, len(pred) + 1), 'Label': pred})
-    predictions_df.to_csv('data/submission.csv', index=False)
+    
+    if model == 'knn':
+        predictions_df.to_csv('data/submission.csv', index=False)
+    elif model == 'mlp':
+        predictions_df.to_csv('data/submission_mlp.csv', index=False)
     print("Submission file created successfully")
