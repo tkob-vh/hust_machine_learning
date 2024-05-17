@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import functools
+import os
 from collections import defaultdict
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, precision_score, recall_score
 
@@ -47,6 +48,9 @@ class LinearLayer:
 
 class MLP:
     def __init__(self, input_size, output_size, n_layers, layer_dims):
+        '''
+        Initialize the MLP model
+        '''
         layer_dims = [input_size] + layer_dims + [output_size]
 
         self.layers = [LinearLayer(layer_dims[i], layer_dims[i + 1]) for i in range(n_layers)] # list of layers in the network
@@ -62,14 +66,23 @@ class MLP:
         self.trained = False
 
     def forward(self, x):
+        '''
+        Forward pass through the network
+        '''
         layers = [functools.partial(layer.forward) for layer in self.layers]
         return functools.reduce(lambda x, y: y(x), layers, x)
     
     def backward(self, output_grad):
+        '''
+        Backward pass through the network
+        '''
         layer_grads = [functools.partial(layer.backward) for layer in reversed(self.layers)]
         return functools.reduce(lambda x, y: y(x), layer_grads, output_grad)
 
     def softmax_crossentropy(self, y, ygt):
+        '''
+        Compute the softmax crossentropy loss
+        '''
         y = y - np.max(y, axis=1, keepdims=True)  # 防止数值溢出
         exp_y = np.exp(y)
         softmax = exp_y / (np.sum(exp_y, axis=1, keepdims=True) + 1e-6)
@@ -77,15 +90,24 @@ class MLP:
 
 
     def softmax_crossentropy_grad(self, y, ygt):
+        '''
+        Compute the gradient of the softmax crossentropy loss
+        '''
         softmax = np.exp(y) / (np.exp(y).sum() + 1e-6)
         softmax[0, ygt] -= 1
         return softmax
     
     def step(self, learning_rate):
+        '''
+        Update the weights and biases of the network
+        '''
         for layer in self.layers:
             layer.step(learning_rate)
     
     def fit(self, X_train, y_train, learning_rate=1e-3, n_epochs=20, show_progress=True):
+        '''
+        Train the model
+        '''
         train_size = X_train.shape[0]
 
         for epoch in range(1, n_epochs + 1):
@@ -108,17 +130,24 @@ class MLP:
 
             self.metrics['accuracy'].append(accuracy_score(y_train, y_pred))
             self.metrics['balanced accuracy'].append(balanced_accuracy_score(y_train, y_pred))
-            self.metrics['recall'].append(precision_score(y_train, y_pred, average='micro'))
+            self.metrics['recall'].append(recall_score(y_train, y_pred, average='micro'))
             self.metrics['precision'].append(precision_score(y_train, y_pred, average='micro'))
             self.metrics['loss'].append(np.mean(running_loss))
 
             if show_progress == True and epoch % 1 == 0:
                  print(f'Epoch: {epoch}/{n_epochs}\tloss: {np.mean(running_loss):.3f}\t',\
-                      f'balanced accuracy on train: {balanced_accuracy_score(y_train, y_pred):.3f}')
+                        f'balanced accuracy on train: {balanced_accuracy_score(y_train, y_pred):.3f}', \
+                        f'accuracy on train: {accuracy_score(y_train, y_pred):.3f}', \
+                        f'recall on train: {recall_score(y_train, y_pred, average="micro"):.3f}', \
+                        f'precision on train: {precision_score(y_train, y_pred, average="micro"):.3f}', \
+                        f'loss: {np.mean(running_loss):.3f}')
                  
         self.trained = True
 
     def predict(self, X_test):
+        '''
+        Predict the output for the test data
+        '''
         if self.trained == False:
             raise ValueError('Model not trained yet')
         y_pred = []
@@ -130,20 +159,32 @@ class MLP:
 
 
 def train_mlp(X_train, y_train):
+    '''
+    Train the MLP model
+    '''
     mlp = MLP(input_size=X_train.shape[1], output_size=10, n_layers=3, layer_dims=[128, 128, 64])
     mlp.fit(X_train, y_train, learning_rate=1e-3, n_epochs=20, show_progress=True)
     return mlp
 
 def inference_mlp(X_test, mlp):
+    '''Inference the MLP model on the test data
+    '''
     return mlp.predict(X_test)
 
 def plot(mlp):
     n_metrics = len(mlp.metrics)
-    fig, ax = plt.subplots(n_metrics, 1, figsize=(10, 5 * n_metrics))
-    fig.tight_layout(pad=5)
+  
     for i, metric in enumerate(mlp.metrics):
         n_epochs = len(mlp.metrics[metric])
-        ax[i].plot(range(1, n_epochs + 1), mlp.metrics[metric], color='k')
-        ax[i].axhline(mlp.metrics[metric][-1], linestyle='--', color='g')
-        ax[i].set_title(metric)
-        ax[i].set_xlabel('epoch')
+        fig, ax = plt.subplots(figsize=(10, 5))  # Create a separate figure for each metric
+
+        ax.plot(range(1, n_epochs + 1), mlp.metrics[metric], color='k')
+        ax.axhline(mlp.metrics[metric][-1], linestyle='--', color='g')
+        ax.set_title(metric)
+        ax.set_xlabel('epoch')
+        ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
+
+        # Save the plot as a separate image
+        filename = os.path.join('log/mlp', f'{metric}.png')  # Generate filename based on metric
+        plt.savefig(filename, dpi=300, bbox_inches='tight')
+        plt.close()  # Close the figure to avoid memory leaks

@@ -1,7 +1,9 @@
 import preprocess
-from model import knn, mlp
+from model import knn, mlp, svm, decisontree
+from sklearn.metrics import accuracy_score
 import numpy as np
 import pandas as pd
+
 
 if __name__ == '__main__':
 
@@ -17,6 +19,13 @@ if __name__ == '__main__':
     elif model == 'mlp':
         mlp_model = mlp.train_mlp(X_train, y_train)
         pred = mlp.inference_mlp(X_test, mlp_model)
+        mlp.plot(mlp_model)
+    elif model == 'dt':
+        dt = decisontree.train_dt(X_train, y_train)
+        pred = decisontree.inference_dt(X_validate, dt)
+        acc = accuracy_score(y_validate, pred)
+        print(f"Accuracy: {acc}")
+
 
 
     predictions_df = pd.DataFrame(data={'ImageId': np.arange(1, len(pred) + 1), 'Label': pred})
@@ -25,4 +34,6 @@ if __name__ == '__main__':
         predictions_df.to_csv('data/submission.csv', index=False)
     elif model == 'mlp':
         predictions_df.to_csv('data/submission_mlp.csv', index=False)
+    elif model == 'dt':
+        predictions_df.to_csv('data/submission_dt.csv', index=False)
     print("Submission file created successfully")

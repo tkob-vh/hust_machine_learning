@@ -1,38 +1,50 @@
 import numpy as np
-import operator
+import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
-from matplotlib import pyplot as plt
+from scipy.spatial.distance import cdist
 
 def euc_dist(x1, x2):
     return np.sqrt(np.sum((x1 - x2) ** 2))
 
 
 class KNN:
-    # K is the number of nearest neighbors to consider
     def __init__(self, K=3):
+        '''
+        This is the constructor of the KNN class.
+        K is the number of nearest neighbors to consider
+        '''
         self.K = K
 
 
-    # fit method is used to train the model
     def fit(self, X_train, y_train):
+        '''
+        Read the training data and store it in the object
+        '''
         self.X_train = X_train
         self.y_train = y_train
 
-    # predict method is used to predict the output for the test data
-
     def predict(self, X_test):
+        '''
+        This function predicts the output for the test data.
+        '''
         predictions = []
-        for i in range(len(X_test)):
-            dist = np.array([euc_dist(X_test[i], x_t) for x_t in self.X_train]) # calculate the distance of the test data with all the training data
-            dist_sorted = dist.argsort()[:self.K] # sort the distance and get the indices of the K nearest neighbors
-            neigh_count = {} # dictionary to store the count of each class in the K nearest neighbors
-            for idx in dist_sorted: 
-                if self.y_train[idx] in neigh_count:
-                    neigh_count[self.y_train[idx]] += 1
+        dists = cdist(X_test, self.X_train, metric='euclidean') # Calculate the distance between the test data and all the training data
+        
+        for dist in dists: # for each test data
+            dist_sorted_indices = dist.argsort()[:self.K]  # Sort the distance and get the indices of the K nearest neighbors
+            neigh_count = {}  # Store the count of each class in the K nearest neighbors
+
+            for idx in dist_sorted_indices:
+                label = self.y_train[idx]
+                if label in neigh_count:
+                    neigh_count[label] += 1
                 else:
-                    neigh_count[self.y_train[idx]] = 1
-            sorted_neigh_count = sorted(neigh_count.items(), key=operator.itemgetter(1), reverse=True)
+                    neigh_count[label] = 1
+
+            # Sort the dictionary based on the count of each class
+            sorted_neigh_count = sorted(neigh_count.items(), key=lambda item: item[1], reverse=True)
             predictions.append(sorted_neigh_count[0][0])
+
         return np.array(predictions)
 
 
@@ -41,7 +53,7 @@ def train_knn(X_train, y_train, X_validate, y_validate):
     This function trains the KNN model on the training data and validates it on the validation data.
     '''
     print("Begin training")
-    kVals = range(1, 5)
+    kVals = range(1, 11)
     accuracies = []
     for K in kVals:
         model = KNN(K)
@@ -52,9 +64,12 @@ def train_knn(X_train, y_train, X_validate, y_validate):
         print("K: ", K, " Accuracy: ", acc)
     max_index = accuracies.index(max(accuracies))
     print("Best K: ", max_index + 1, " Accuracy: ", max(accuracies))
-    # plt.plot(kVals, accuracies)
-    # plt.xlabel('K Value')
-    # plt.ylabel('Accuracy')
+    plt.plot(kVals, accuracies)
+    plt.xlabel('K Value')
+    plt.ylabel('Accuracy')
+    plt.title('K-Accuracy Plot')
+    plt.xticks(kVals)
+    plt.savefig('log/knn/k_accuracy_plot.png')
     print("Training completed")
     return max_index + 1
 
@@ -68,3 +83,4 @@ def inference_knn(X_train, y_train, X_test, k):
     pred = model.predict(X_test)
     print("Inference completed")
     return pred
+
