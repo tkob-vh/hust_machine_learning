@@ -1,0 +1,29 @@
+===
+#!/bin/bash
+#SBATCH -n 32
+#SBATCH --output=log/dt/log.txt
+
+echo "==="
+cat job.slurm
+echo "==="
+
+python3 main.py dt
+
+echo "finished"===
+Begin preprocessing data
+Begin loading train data
+X_train shape:  (33600, 784)
+X_validate shape:  (8400, 784)
+y_train shape:  (33600,)
+y_validate shape:  (8400,)
+Begin loading test data
+X_test shape:  (28000, 784)
+Data preprocessing completed
+Accuracy:  0.8523809523809524
+Balanced Accuracy:  0.8510831321969679
+Precision:  [0.89975845 0.92249731 0.83941606 0.82792208 0.86127865 0.77170868
+ 0.88717949 0.89670829 0.78208232 0.8189158 ]
+Recall:  [0.9129902  0.94279428 0.81560284 0.81643543 0.85101311 0.78490028
+ 0.88152866 0.88465845 0.77365269 0.84725537]
+Submission file created successfully
+finished

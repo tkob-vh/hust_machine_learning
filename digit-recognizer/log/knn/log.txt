@@ -1,0 +1,34 @@
+===
+#!/bin/bash
+#SBATCH --output=log/knn/log.txt
+
+echo "==="
+cat job.slurm
+echo "==="
+
+python3 main.py knn===
+Begin preprocessing data
+Begin loading train data
+X_train shape:  (33600, 784)
+X_validate shape:  (8400, 784)
+y_train shape:  (33600,)
+y_validate shape:  (8400,)
+Begin loading test data
+X_test shape:  (28000, 784)
+Data preprocessing completed
+Begin training
+K:  1  Accuracy:  0.9686904761904762
+K:  2  Accuracy:  0.9686904761904762
+K:  3  Accuracy:  0.9683333333333334
+K:  4  Accuracy:  0.9698809523809524
+K:  5  Accuracy:  0.9657142857142857
+K:  6  Accuracy:  0.9672619047619048
+K:  7  Accuracy:  0.9644047619047619
+K:  8  Accuracy:  0.9663095238095238
+K:  9  Accuracy:  0.9633333333333334
+K:  10  Accuracy:  0.9636904761904762
+Best K:  4  Accuracy:  0.9698809523809524
+Training completed
+Begin inference
+Inference completed
+Submission file created successfully

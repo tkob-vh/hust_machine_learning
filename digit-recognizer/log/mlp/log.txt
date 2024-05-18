@@ -1,0 +1,287 @@
+===
+#!/bin/bash
+#SBATCH -n 64
+#SBATCH -w hepnode1
+#SBATCH --output=log/mlp/log.txt
+
+echo "==="
+cat job.slurm
+echo "==="
+
+python3 main.py mlp===
+/home/yyx/software/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_classification.py:2006: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/home/yyx/software/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_classification.py:2006: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/home/yyx/software/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1334: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Begin preprocessing data
+Begin loading train data
+X_train shape:  (33600, 784)
+X_validate shape:  (8400, 784)
+y_train shape:  (33600,)
+y_validate shape:  (8400,)
+Begin loading test data
+X_test shape:  (28000, 784)
+Data preprocessing completed
+Epoch: 1/20	loss: 0.482
+balanced accuracy on train: 0.863
+accuracy on train: 0.865
+class 0 - recall: 0.934, precision: 0.920
+class 1 - recall: 0.948, precision: 0.922
+class 2 - recall: 0.842, precision: 0.870
+class 3 - recall: 0.832, precision: 0.851
+class 4 - recall: 0.851, precision: 0.868
+class 5 - recall: 0.788, precision: 0.817
+class 6 - recall: 0.923, precision: 0.895
+class 7 - recall: 0.891, precision: 0.880
+class 8 - recall: 0.813, precision: 0.808
+class 9 - recall: 0.812, precision: 0.828
+Epoch: 2/20	loss: 0.234
+balanced accuracy on train: 0.931
+accuracy on train: 0.931
+class 0 - recall: 0.969, precision: 0.953
+class 1 - recall: 0.976, precision: 0.958
+class 2 - recall: 0.916, precision: 0.929
+class 3 - recall: 0.895, precision: 0.915
+class 4 - recall: 0.927, precision: 0.924
+class 5 - recall: 0.901, precision: 0.917
+class 6 - recall: 0.961, precision: 0.949
+class 7 - recall: 0.946, precision: 0.947
+class 8 - recall: 0.905, precision: 0.906
+class 9 - recall: 0.910, precision: 0.909
+Epoch: 3/20	loss: 0.176
+balanced accuracy on train: 0.949
+accuracy on train: 0.949
+class 0 - recall: 0.977, precision: 0.964
+class 1 - recall: 0.980, precision: 0.969
+class 2 - recall: 0.942, precision: 0.947
+class 3 - recall: 0.923, precision: 0.938
+class 4 - recall: 0.949, precision: 0.942
+class 5 - recall: 0.930, precision: 0.943
+class 6 - recall: 0.970, precision: 0.962
+class 7 - recall: 0.959, precision: 0.960
+class 8 - recall: 0.929, precision: 0.934
+class 9 - recall: 0.930, precision: 0.930
+Epoch: 4/20	loss: 0.140
+balanced accuracy on train: 0.959
+accuracy on train: 0.959
+class 0 - recall: 0.980, precision: 0.973
+class 1 - recall: 0.982, precision: 0.975
+class 2 - recall: 0.956, precision: 0.958
+class 3 - recall: 0.941, precision: 0.952
+class 4 - recall: 0.959, precision: 0.954
+class 5 - recall: 0.949, precision: 0.958
+class 6 - recall: 0.976, precision: 0.969
+class 7 - recall: 0.965, precision: 0.965
+class 8 - recall: 0.941, precision: 0.943
+class 9 - recall: 0.941, precision: 0.943
+Epoch: 5/20	loss: 0.116
+balanced accuracy on train: 0.966
+accuracy on train: 0.967
+class 0 - recall: 0.982, precision: 0.979
+class 1 - recall: 0.983, precision: 0.980
+class 2 - recall: 0.968, precision: 0.966
+class 3 - recall: 0.951, precision: 0.961
+class 4 - recall: 0.967, precision: 0.962
+class 5 - recall: 0.961, precision: 0.965
+class 6 - recall: 0.982, precision: 0.975
+class 7 - recall: 0.970, precision: 0.968
+class 8 - recall: 0.953, precision: 0.956
+class 9 - recall: 0.950, precision: 0.953
+Epoch: 6/20	loss: 0.097
+balanced accuracy on train: 0.973
+accuracy on train: 0.973
+class 0 - recall: 0.984, precision: 0.982
+class 1 - recall: 0.987, precision: 0.986
+class 2 - recall: 0.976, precision: 0.971
+class 3 - recall: 0.959, precision: 0.970
+class 4 - recall: 0.976, precision: 0.969
+class 5 - recall: 0.967, precision: 0.969
+class 6 - recall: 0.984, precision: 0.979
+class 7 - recall: 0.973, precision: 0.975
+class 8 - recall: 0.962, precision: 0.964
+class 9 - recall: 0.957, precision: 0.961
+Epoch: 7/20	loss: 0.084
+balanced accuracy on train: 0.977
+accuracy on train: 0.977
+class 0 - recall: 0.986, precision: 0.986
+class 1 - recall: 0.990, precision: 0.987
+class 2 - recall: 0.979, precision: 0.975
+class 3 - recall: 0.967, precision: 0.975
+class 4 - recall: 0.979, precision: 0.974
+class 5 - recall: 0.973, precision: 0.975
+class 6 - recall: 0.987, precision: 0.982
+class 7 - recall: 0.977, precision: 0.977
+class 8 - recall: 0.967, precision: 0.970
+class 9 - recall: 0.963, precision: 0.966
+Epoch: 8/20	loss: 0.072
+balanced accuracy on train: 0.980
+accuracy on train: 0.980
+class 0 - recall: 0.988, precision: 0.988
+class 1 - recall: 0.990, precision: 0.989
+class 2 - recall: 0.983, precision: 0.978
+class 3 - recall: 0.972, precision: 0.978
+class 4 - recall: 0.982, precision: 0.979
+class 5 - recall: 0.978, precision: 0.981
+class 6 - recall: 0.989, precision: 0.986
+class 7 - recall: 0.979, precision: 0.979
+class 8 - recall: 0.972, precision: 0.974
+class 9 - recall: 0.967, precision: 0.970
+Epoch: 9/20	loss: 0.063
+balanced accuracy on train: 0.983
+accuracy on train: 0.983
+class 0 - recall: 0.991, precision: 0.989
+class 1 - recall: 0.991, precision: 0.990
+class 2 - recall: 0.986, precision: 0.982
+class 3 - recall: 0.977, precision: 0.983
+class 4 - recall: 0.986, precision: 0.982
+class 5 - recall: 0.981, precision: 0.984
+class 6 - recall: 0.991, precision: 0.988
+class 7 - recall: 0.982, precision: 0.983
+class 8 - recall: 0.976, precision: 0.978
+class 9 - recall: 0.973, precision: 0.975
+Epoch: 10/20	loss: 0.055
+balanced accuracy on train: 0.986
+accuracy on train: 0.986
+class 0 - recall: 0.993, precision: 0.990
+class 1 - recall: 0.993, precision: 0.992
+class 2 - recall: 0.989, precision: 0.986
+class 3 - recall: 0.981, precision: 0.985
+class 4 - recall: 0.987, precision: 0.985
+class 5 - recall: 0.984, precision: 0.988
+class 6 - recall: 0.992, precision: 0.990
+class 7 - recall: 0.987, precision: 0.984
+class 8 - recall: 0.980, precision: 0.981
+class 9 - recall: 0.975, precision: 0.978
+Epoch: 11/20	loss: 0.048
+balanced accuracy on train: 0.988
+accuracy on train: 0.988
+class 0 - recall: 0.994, precision: 0.991
+class 1 - recall: 0.993, precision: 0.992
+class 2 - recall: 0.991, precision: 0.989
+class 3 - recall: 0.984, precision: 0.989
+class 4 - recall: 0.989, precision: 0.987
+class 5 - recall: 0.987, precision: 0.991
+class 6 - recall: 0.993, precision: 0.993
+class 7 - recall: 0.987, precision: 0.986
+class 8 - recall: 0.983, precision: 0.984
+class 9 - recall: 0.979, precision: 0.981
+Epoch: 12/20	loss: 0.042
+balanced accuracy on train: 0.990
+accuracy on train: 0.990
+class 0 - recall: 0.995, precision: 0.992
+class 1 - recall: 0.994, precision: 0.993
+class 2 - recall: 0.992, precision: 0.990
+class 3 - recall: 0.988, precision: 0.992
+class 4 - recall: 0.991, precision: 0.989
+class 5 - recall: 0.989, precision: 0.994
+class 6 - recall: 0.994, precision: 0.993
+class 7 - recall: 0.989, precision: 0.988
+class 8 - recall: 0.986, precision: 0.985
+class 9 - recall: 0.983, precision: 0.984
+Epoch: 13/20	loss: 0.037
+balanced accuracy on train: 0.992
+accuracy on train: 0.992
+class 0 - recall: 0.996, precision: 0.993
+class 1 - recall: 0.994, precision: 0.993
+class 2 - recall: 0.992, precision: 0.992
+class 3 - recall: 0.990, precision: 0.994
+class 4 - recall: 0.993, precision: 0.991
+class 5 - recall: 0.993, precision: 0.994
+class 6 - recall: 0.995, precision: 0.994
+class 7 - recall: 0.991, precision: 0.989
+class 8 - recall: 0.988, precision: 0.988
+class 9 - recall: 0.986, precision: 0.987
+Epoch: 14/20	loss: 0.033
+balanced accuracy on train: 0.993
+accuracy on train: 0.993
+class 0 - recall: 0.995, precision: 0.994
+class 1 - recall: 0.994, precision: 0.994
+class 2 - recall: 0.993, precision: 0.994
+class 3 - recall: 0.991, precision: 0.995
+class 4 - recall: 0.995, precision: 0.992
+class 5 - recall: 0.995, precision: 0.995
+class 6 - recall: 0.996, precision: 0.996
+class 7 - recall: 0.991, precision: 0.990
+class 8 - recall: 0.990, precision: 0.989
+class 9 - recall: 0.987, precision: 0.990
+Epoch: 15/20	loss: 0.029
+balanced accuracy on train: 0.994
+accuracy on train: 0.994
+class 0 - recall: 0.996, precision: 0.995
+class 1 - recall: 0.995, precision: 0.996
+class 2 - recall: 0.996, precision: 0.994
+class 3 - recall: 0.992, precision: 0.996
+class 4 - recall: 0.996, precision: 0.994
+class 5 - recall: 0.997, precision: 0.995
+class 6 - recall: 0.997, precision: 0.997
+class 7 - recall: 0.993, precision: 0.992
+class 8 - recall: 0.992, precision: 0.992
+class 9 - recall: 0.988, precision: 0.992
+Epoch: 16/20	loss: 0.025
+balanced accuracy on train: 0.995
+accuracy on train: 0.995
+class 0 - recall: 0.998, precision: 0.997
+class 1 - recall: 0.995, precision: 0.997
+class 2 - recall: 0.997, precision: 0.995
+class 3 - recall: 0.994, precision: 0.997
+class 4 - recall: 0.997, precision: 0.994
+class 5 - recall: 0.998, precision: 0.996
+class 6 - recall: 0.997, precision: 0.997
+class 7 - recall: 0.993, precision: 0.994
+class 8 - recall: 0.993, precision: 0.993
+class 9 - recall: 0.990, precision: 0.993
+Epoch: 17/20	loss: 0.022
+balanced accuracy on train: 0.996
+accuracy on train: 0.996
+class 0 - recall: 0.998, precision: 0.997
+class 1 - recall: 0.997, precision: 0.998
+class 2 - recall: 0.997, precision: 0.996
+class 3 - recall: 0.995, precision: 0.998
+class 4 - recall: 0.998, precision: 0.996
+class 5 - recall: 0.998, precision: 0.996
+class 6 - recall: 0.998, precision: 0.998
+class 7 - recall: 0.994, precision: 0.995
+class 8 - recall: 0.995, precision: 0.995
+class 9 - recall: 0.992, precision: 0.995
+Epoch: 18/20	loss: 0.020
+balanced accuracy on train: 0.997
+accuracy on train: 0.997
+class 0 - recall: 0.998, precision: 0.997
+class 1 - recall: 0.998, precision: 0.998
+class 2 - recall: 0.997, precision: 0.996
+class 3 - recall: 0.997, precision: 0.998
+class 4 - recall: 0.998, precision: 0.998
+class 5 - recall: 0.998, precision: 0.998
+class 6 - recall: 0.998, precision: 0.999
+class 7 - recall: 0.995, precision: 0.995
+class 8 - recall: 0.996, precision: 0.996
+class 9 - recall: 0.994, precision: 0.996
+Epoch: 19/20	loss: 0.017
+balanced accuracy on train: 0.998
+accuracy on train: 0.998
+class 0 - recall: 0.999, precision: 0.998
+class 1 - recall: 0.998, precision: 0.998
+class 2 - recall: 0.997, precision: 0.997
+class 3 - recall: 0.998, precision: 0.999
+class 4 - recall: 0.999, precision: 0.998
+class 5 - recall: 0.999, precision: 0.999
+class 6 - recall: 0.999, precision: 0.999
+class 7 - recall: 0.996, precision: 0.995
+class 8 - recall: 0.997, precision: 0.997
+class 9 - recall: 0.995, precision: 0.996
+Epoch: 20/20	loss: 0.015
+balanced accuracy on train: 0.998
+accuracy on train: 0.998
+class 0 - recall: 1.000, precision: 0.999
+class 1 - recall: 0.998, precision: 0.998
+class 2 - recall: 0.998, precision: 0.998
+class 3 - recall: 0.998, precision: 0.999
+class 4 - recall: 0.999, precision: 0.998
+class 5 - recall: 0.999, precision: 0.999
+class 6 - recall: 0.999, precision: 0.999
+class 7 - recall: 0.997, precision: 0.996
+class 8 - recall: 0.998, precision: 0.998
+class 9 - recall: 0.996, precision: 0.998
+Submission file created successfully
