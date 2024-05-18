@@ -134,18 +134,19 @@ class MLP:
             self.metrics['precision'].append(precision_score(y_train, y_pred, average='micro'))
             self.metrics['loss'].append(np.mean(running_loss))
 
-            if show_progress:
+            if show_progress and epoch % 1 == 0:
                 balanced_acc = balanced_accuracy_score(y_train, y_pred)
                 acc = accuracy_score(y_train, y_pred)
                 recalls = recall_score(y_train, y_pred, average=None)
                 precisions = precision_score(y_train, y_pred, average=None)
-                
+
                 print(f'Epoch: {epoch}/{n_epochs}\tloss: {np.mean(running_loss):.3f}')
                 print(f'balanced accuracy on train: {balanced_acc:.3f}')
                 print(f'accuracy on train: {acc:.3f}')
                 
                 for i, (rec, prec) in enumerate(zip(recalls, precisions)):
-                    print(f'class {i} - recall: {rec:.3f}, precision: {prec:.3f}')
+                    if i < 10:
+                        print(f'class {i} - recall: {rec:.3f}, precision: {prec:.3f}')
 
                  
         self.trained = True
