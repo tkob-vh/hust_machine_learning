@@ -6,7 +6,7 @@ from sklearn.preprocessing import MinMaxScaler
 def load_train_data():
     print("Begin loading train data")
     # read the train and test data
-    train_data = pd.read_csv('data/train.csv', nrows=5000)
+    train_data = pd.read_csv('data/train.csv')
 
     # split the train data into X_train and y_train
     X = train_data.drop(columns=['label']).values
@@ -28,7 +28,7 @@ def load_train_data():
 
 def load_test_data():
     print("Begin loading test data")
-    test_data = pd.read_csv('data/test.csv', nrows=5000)
+    test_data = pd.read_csv('data/test.csv')
     X_test = test_data.values
 
     # normalize the features
