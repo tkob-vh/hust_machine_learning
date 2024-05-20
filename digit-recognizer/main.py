@@ -26,7 +26,9 @@ if __name__ == '__main__':
     elif model == 'dt':
         dt = decisontree.train_dt(X_train, y_train, X_validate, y_validate)
         pred = decisontree.inference_dt(X_test, dt)
-
+    else:
+        print("Invalid model name")
+        sys.exit(1)
 
 
 

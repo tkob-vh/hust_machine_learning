@@ -83,7 +83,7 @@ class MLP:
         '''
         Compute the softmax crossentropy loss
         '''
-        y = y - np.max(y, axis=1, keepdims=True)  # 防止数值溢出
+        y = y - np.max(y, axis=1, keepdims=True)
         exp_y = np.exp(y)
         softmax = exp_y / (np.sum(exp_y, axis=1, keepdims=True) + 1e-6)
         return -np.log(softmax[np.arange(y.shape[0]), ygt] + 1e-6)
